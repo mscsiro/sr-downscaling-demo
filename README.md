@@ -11,6 +11,15 @@ Can be integrated into uncertainty quantification (UQ) or history matching workf
 
 This repository provides a small synthetic example, the network definition, and training code to reproduce the workflow on a CPU.
 
+If you use this repository, please cite the associated publication:
+
+Sayyafzadeh, M., Bouquet, S., & Gervais, V. (2024, September).  
+**Downscaling State Variables of Reactive Transport Simulation Using Recurrent Super-Resolution Networks.**  
+In *ECMOR 2024* (Vol. 2024, No. 1, pp. 1–18).  
+European Association of Geoscientists & Engineers.  
+https://doi.org/10.3997/2214-4609.202452072
+
+
 Data provenance & citations
 The demonstration dataset included in this repository is derived from publicly available tools and methods:
 
@@ -25,3 +34,33 @@ https://www.sintef.no/projectweb/mrst/
 Flow simulation performed with OPM Flow:
 Open Porous Media (OPM) Initiative. OPM Flow – A fully-implicit black-oil simulator.
 https://opm-project.org
+
+
+Dataset description
+Type: Two-phase, two-component immiscible flow.
+Permeability fields: Random MPS realisations based on the Strebelle (2002) training image, with no vertical continuity between layers.
+Initial condition: Fully saturated with the non-wetting phase.
+Boundary conditions: Wetting phase injected at a constant rate of 100 m³/day per unit area on one side; opposite side free boundary; remaining sides no-flow.
+Fine-scale model: 159×159×2 cells, isotropic permeability.
+Coarse-scale model: 53×53×1 cells. 
+
+Upscaling: Local pressure solver with periodic boundary conditions (MRST Upscaling module).
+
+Simulation: Fully implicit scheme in OPM Flow. 
+
+Primary variables: Wetting phase saturation and non-wetting phase pressure (no secondary variables).
+
+Input parameters: Fine-scale permeability fields (other parameters fixed across all realisations).
+
+Total realisations/samples: 100
+Training set: 80 realisations
+Test set: 20 realisations
+Training/validation samples: 720 (derived from timesteps #2 onward to avoid large disturbances in the initial timestep that could degrade network performance).
+
+Performance note
+The coarse-scale simulation runs way faster compared to the fine-scale model. The reduction from two layers to one in the coarse grid introduces a non-trivial challenge for restoring lost vertical information, making this example a suitable testbed for the proposed recurrent super-resolution network.
+
+
+
+Create the env:
+conda env create -f env_macos.yml   

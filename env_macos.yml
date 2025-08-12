@@ -1,0 +1,31 @@
+name: tf_sr_demo
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - numpy=1.23
+  - scipy
+  - matplotlib
+  - scikit-image
+  - h5py
+  - pydot
+  - tqdm
+  - pillow
+  - ca-certificates
+  - certifi
+  - openssl
+  - pip:
+      - tensorflow-macos==2.12.0
+      - tensorflow-metal==1.0.0
+      - keras==2.12.0
+      - tensorboard==2.12.3
+      - absl-py==1.4.0
+      - protobuf==4.23.3
+      - grpcio==1.56.0
+      - google-auth==2.20.0
+      - google-auth-oauthlib==1.0.0
+      - requests==2.31.0
+      - mat73==0.60
+
