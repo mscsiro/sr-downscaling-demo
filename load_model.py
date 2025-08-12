@@ -216,7 +216,7 @@ x_test_dco2 = X_dsW_n_re[n_train*n_tsteps:, :, :, :,:]
 x_test_dp = X_dp_n_re[n_train*n_tsteps:, :, :, :,:]
 
 
-model_co2 = tf.keras.models.load_model('model_co2', custom_objects={'r_squared': r_squared, 'ssim_loss': ssim_loss})
+model_sw = tf.keras.models.load_model('model_sw', custom_objects={'r_squared': r_squared, 'ssim_loss': ssim_loss})
 
 
 model_p = tf.keras.models.load_model('model_p', custom_objects={'r_squared': r_squared, 'ssim_loss': ssim_loss})
@@ -286,7 +286,7 @@ for i in range(n_test_calc):
             x_test_dp[(n_tsteps*i):(i*n_tsteps+1), : ,: , :]])
 
     # y_test_co2_ap = y_test_co2[(n_tsteps * i):(i * n_tsteps + 1), :, :, :]
-    y_test_co2_ap = model_co2.predict(
+    y_test_co2_ap = model_sw.predict(
         [x_test_perm[(n_tsteps*i):(i*n_tsteps+1), : ,:, :],
          x_test_co2_a[(n_tsteps*i):(i*n_tsteps+1), : ,:, :],
          x_test_p_a[(n_tsteps*i):(i*n_tsteps+1), : ,:, :],
@@ -321,7 +321,7 @@ for i in range(n_test_calc):
                 x_test_dp[(n_tsteps*i+t):(i*n_tsteps+t+1), : ,:, :,:]])
 
         # y_test_co2_ap_temp = y_test_co2[(n_tsteps * i + t):(i * n_tsteps + t + 1), :, :, :, :]
-        y_test_co2_ap_temp = model_co2.predict(
+        y_test_co2_ap_temp = model_sw.predict(
             [x_test_perm[(n_tsteps * i + t):(i * n_tsteps + t + 1), :, :, :],
              x_test_co2_a[(n_tsteps * i + t):(i * n_tsteps + t + 1), :, :, :],
              x_test_p_a[(n_tsteps * i + t):(i * n_tsteps + t + 1), :, :, :],

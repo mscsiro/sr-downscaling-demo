@@ -247,8 +247,8 @@ callback = tf.keras.callbacks.EarlyStopping(
 # 10. Network initialization 
 # -----------------------------------------------------------------------------
 
-model_co2 = model_create_two_state(x_fine, y_fine, z_fine, x_coarse, y_coarse, z_coarse, ks_x, ks_y, ks_z)
-print(model_co2.summary())
+model_sw = model_create_two_state(x_fine, y_fine, z_fine, x_coarse, y_coarse, z_coarse, ks_x, ks_y, ks_z)
+print(model_sw.summary())
 
 
 model_p = model_create_two_state(x_fine, y_fine, z_fine, x_coarse, y_coarse, z_coarse, ks_x, ks_y, ks_z)
@@ -285,7 +285,7 @@ history_p = model_p.fit(
 model_p.save('model_p')
 
 
-history_co2 = model_co2.fit(
+history_co2 = model_sw.fit(
 [x_train_perm_shuff,
     x_train_co2_a_shuff,
     x_train_p_a_shuff,
@@ -297,7 +297,7 @@ epochs=n_epochs, batch_size=batch_size, validation_split=0.1, validation_freq=1,
 workers=4,
 # callbacks=[callback, reduce_lr, model_checkpoint_callback]
 callbacks=[callback, reduce_lr])
-model_co2.save('model_co2')
+model_sw.save('model_sw')
 
 
 # __________________________ post processing ________________________________________
