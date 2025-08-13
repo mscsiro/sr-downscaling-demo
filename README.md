@@ -6,7 +6,8 @@ Forecasting the fate of injected fluids in geological formations (e.g., CO₂ st
 
 The method:
 Uses permeability (or other geological parameters), the fine-scale state at the current timestep and the upsampled coarse-scale state at the next timestep as inputs. 
-Treats all variables as multi-channel images and embeds temporal recurrence so that each timestep of each realisation becomes a training sample.
+Treats all variables as multi-channel images and embeds temporal recurrence so that each timestep of each realisation becomes a training sample. 
+The trained network corrects the coarse-scale simulation results (state variable fields) and reproduces the fine-scale simulation results in a recurrent format.   
 Can be integrated into uncertainty quantification (UQ) or history matching workflows to deliver large speed-ups while retaining fine-scale resolution.
 
 This repository provides a small synthetic example, the network definition, and training code to reproduce the workflow on a CPU.
